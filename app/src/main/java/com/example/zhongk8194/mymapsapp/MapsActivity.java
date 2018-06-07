@@ -8,6 +8,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -132,7 +133,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         if (locationManager != null) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(MapsActivity.this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
 
@@ -170,6 +172,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //kick off the location tracker using getLocation to start the LocationListener
         //if (notTrackingMyLocation) {getLocation(); notTrackingMyLocation = false;}
         //else {removeUpdates for both network and gps; notTrackingMyLocation = true;}
+        getLocation();
+        Log.d("MyMapsActivity", "trackMyLocation: calling getLocation");
+        if (notTrackingMyLocation){
+            getLocation();
+            notTrackingMyLocation = false;
+        }
+        else {
+            locationManager.removeUpdates(locationListenerGPS);
+            locationManager.removeUpdates(locationListenerNetwork);
+            notTrackingMyLocation = true;
+        }
 
     }
 
@@ -261,7 +274,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
 
             }
-            //Add a View button and method to switch between satellite and map views
             //end onSearch()
         }
 
@@ -297,6 +309,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (isGPSEnabled) {
                     //locationManager request for GPS_PROVIDER
                     //Code here...
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    } //is this if statement needed
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListenerGPS);
                 }
             } catch (Exception e) {
                 Log.d("MyMapsApp", "getLocation: Exception in getLocation");
@@ -353,7 +370,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //if doing one time remove updates to both gps and network
                 //else do nothing.
 
-                if ()
+                if () {
+                    locationManager.removeUpdates(locationListenerNetwork);
+                    locationManager.removeUpdates(locationListenerGPS);
+                }
+
 
             }
 
@@ -372,6 +393,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //break;
                 //default:
                 //enable both network and gps
+
+                switch(i)
+                if (LocationProvider.AVAILABLE ) {
+                    Log.d("MyMapsApp", "onStatusChanged: status change");
+                    break;
+                }
+                if (LocationProvider.OUT_OF_SERVICE = 0) {
+
+                }
+                if (LocationProvider.TEMPORARILY_UNAVAILABLE){
+
+                }
+
+
+
 
             }
 
