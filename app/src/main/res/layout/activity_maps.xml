@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width ="match_parent"
-    android:layout_height ="match_parent"
-    xmlns:android = "http://schemas.android.com/apk/res/android"
-    android:orientation = "vertical" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <!-- Layout for the View button -->
 
@@ -12,32 +12,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_orange_light"
+        android:baselineAligned="false"
         android:weightSum="1">
 
         <Button
             android:id="@+id/button_view"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="245dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:layout_weight="1"
             android:onClick="changeView"
             android:text="View" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
+            android:layout_width="131dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:onClick="clear"
+            android:text="Clear" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="trackMyLocation"
+            android:text="Track" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light"
+        android:baselineAligned="false"
+        android:weightSum="1">
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="wrap_content"
+            android:layout_width="194dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:baselineAligned="false"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="78dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onSearch"
+            android:text="Search" />
 
     </LinearLayout>
 
