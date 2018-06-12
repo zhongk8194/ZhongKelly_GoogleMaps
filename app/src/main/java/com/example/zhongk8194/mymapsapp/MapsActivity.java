@@ -177,7 +177,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //Add a View button and method to switch between satellite and map views
-    public void changeView(GoogleMap googleMap) {
+    public void changeView(View view) {
         Log.d("MyMapsApp", "changing view");
         if (mMap.getMapType() == 1) {
             mMap.setMapType(2);
@@ -256,12 +256,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     //Place a marker on the map
                     mMap.addMarker(new MarkerOptions().position(latLng).title(i + ": " + address.getSubThoroughfare()
-                            + address.getSubThoroughfare()));
+                            + " " + address.getThoroughfare()));
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                     Log.d("MyMapsApp", "added Marker and updated animateCamera");
                 }
             }
-
         }
         //end onSearch()
     }
